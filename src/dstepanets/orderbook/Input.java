@@ -8,12 +8,14 @@ import java.io.IOException;
 public class Input {
 
 	private OrderBook orderBook;
-	private int currentLine;
+	private static int currentLine;
 
 	public Input(OrderBook orderBook) {
 		this.orderBook = orderBook;
 		currentLine = 0;
 	}
+
+	public static int getCurrentLine() { return currentLine; }
 
 	void parseInputFile(String path) {
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -34,6 +36,10 @@ public class Input {
 					default:
 						Output.logError(currentLine);
 				}
+//				TODO temp debug
+				System.out.println(">> ln=" + currentLine + ": " + ln);
+				Output.printMaps("Bids", orderBook.bids);
+				Output.printMaps("Asks", orderBook.asks);
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Input file not found or can't be read.");
