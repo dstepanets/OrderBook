@@ -12,7 +12,7 @@ public class Output {
 
 	static {
 		try {
-			writer = new BufferedWriter(new FileWriter(new File("resources/output.csv"), false));
+			writer = new BufferedWriter(new FileWriter(new File("./resources/output.csv"), false));
 		} catch (IOException e) {
 			System.err.println("Error on creating or opening the output.csv file.");
 			e.printStackTrace();
@@ -21,11 +21,11 @@ public class Output {
 
 	}
 
-//	I decided not to stop execution, just report invalid line to console and ignore it
+//	I decided not to stop execution on bad input,
+//	just report invalid line to console and ignore it
 	static void logError(int line) {
 		System.err.println("<Invalid command on line " + line + ">");
 	}
-
 	static void logError(String msg) {
 		System.err.println(msg);
 	}
@@ -60,7 +60,7 @@ public class Output {
 	}
 
 
-
+//	For debugging
 	static void printMaps(String ordersType, TreeMap<Integer, Integer> map) {
 		List<Integer> keysSorted = new ArrayList<>(map.keySet());
 		Collections.sort(keysSorted);
@@ -69,7 +69,6 @@ public class Output {
 			System.out.print(i + "=" + map.get(i) + "|");
 		}
 		System.out.println();
-
 	}
 
 }

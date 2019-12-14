@@ -12,11 +12,12 @@ public class Input {
 
 	public Input(OrderBook orderBook) {
 		this.orderBook = orderBook;
-		currentLine = 0;
+		currentLine = 0; // input files line count for error logging
 	}
 
 	public static int getCurrentLine() { return currentLine; }
 
+//	read line by line and report all invalid lines to console, not stopping execution
 	void parseInputFile(String path) {
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String ln;
@@ -36,10 +37,6 @@ public class Input {
 					default:
 						Output.logError(currentLine);
 				}
-//				TODO temp debug
-				System.out.println(">> ln=" + currentLine + ": " + ln);
-				Output.printMaps("Bids", orderBook.bids);
-				Output.printMaps("Asks", orderBook.asks);
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Input file not found or can't be read.");
